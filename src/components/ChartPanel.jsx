@@ -9,7 +9,7 @@ const ChartPanel = ({ activeKpi }) => {
   if (activeKpi === 'kpi-d') return <ChartKpiD />;
   
   return (
-    <div className="flex flex-col h-[700px] w-full bg-[#0b1320] border border-slate-800 rounded flex items-center justify-center">
+    <div className="flex flex-col h-[800px] w-full bg-[#0b1320] border border-slate-800 rounded flex items-center justify-center">
       <p className="text-slate-500 font-tech">Data untuk {activeKpi} sedang dalam pengembangan.</p>
     </div>
   );

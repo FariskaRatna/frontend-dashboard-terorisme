@@ -153,11 +153,11 @@ const TabButton = ({ id, label1, label2, activeTab, setActiveTab }) => {
 
 // --- KOMPONEN UTAMA ---
 const ChartKpiD = () => {
-  const [activeTab, setActiveTab] = useState('D2'); // Saya set default ke D2 agar kamu bisa langsung lihat
+  const [activeTab, setActiveTab] = useState('D2'); 
   const [activeSubTabD2, setActiveSubTabD2] = useState('motivasi');
 
   return (
-    <div className="flex flex-col h-[740px] w-full bg-[#0b1320] border border-slate-800 rounded shadow-lg overflow-hidden">
+    <div className="flex flex-col h-[800px] w-full bg-[#0b1320] border border-slate-800 rounded shadow-lg overflow-hidden">
       
       {/* Header Utama Panel */}
       <div className="flex items-center px-5 py-4 shrink-0">

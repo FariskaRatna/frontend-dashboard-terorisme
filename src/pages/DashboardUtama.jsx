@@ -13,7 +13,7 @@ const DashboardUtama = () => {
       <Header />
       <TitleBar />
 
-      <div className="flex gap-3 px-6 pb-6 pt-2">
+      <div className="flex gap-5 px-6 pb-6 pt-2">
         <div className="flex-[1.5] flex flex-col gap-3 min-w-0">
           <KpiMetrics 
             activeKpi={activeKpi} 

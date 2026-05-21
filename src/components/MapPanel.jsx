@@ -158,7 +158,6 @@ const MapPanel = () => {
     return result;
   }
 
-  // 3. PERBAIKAN DOMINANT IDEOLOGY: Sekarang membaca dari Object, bukan dari String
   const getDominantIdeology = (ideologiesObj) => {
     if (!ideologiesObj || Object.keys(ideologiesObj).length === 0) return "N/A";
     return Object.keys(ideologiesObj).reduce((a, b) => ideologiesObj[a] > ideologiesObj[b] ? a : b);
@@ -321,7 +320,7 @@ const MapPanel = () => {
   ];
 
   return (
-    <div className="flex flex-col w-full h-[570px] bg-[#0a1120] border border-slate-800 rounded-sm overflow-hidden shadow-2xl font-sans">
+    <div className="flex flex-col w-full h-[664px] bg-[#0a1120] border border-slate-800 rounded-sm overflow-hidden shadow-2xl font-sans">
       
       <div className="flex justify-between items-center px-4 py-3 border-b border-slate-800/50 bg-[#070d1a]">
         <div className="flex items-center gap-2.5">
@@ -372,7 +371,6 @@ const MapPanel = () => {
           )}
         </div>
 
-        {/* Ranking Provinsi ATAU Detail Wilayah */}
         <div className="absolute top-5 right-5 z-[400] flex flex-col w-[240px] bg-[#0a1120]/95 border border-slate-700 rounded shadow-2xl backdrop-blur-md max-h-[430px] overflow-hidden">
           {!selectedProvince && (
             <>
@@ -466,7 +464,6 @@ const MapPanel = () => {
           )}
         </div>
 
-        {/* Leaflet Map */}
         <MapContainer center={[-2.5, 118]} zoom={5} zoomControl={false} className="w-full h-full z-[10]" style={{ background: '#0a0a0a' }}>
           <TileLayer attribution='&copy; CARTO' url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" subdomains="abcd" maxZoom={20} />
           {geoData && <GeoJSON ref={geoJsonLayerRef} data={geoData} style={(f) => getFeatureStyle(f, currentStep)} onEachFeature={onEachProvince} />}
@@ -510,7 +507,6 @@ const MapPanel = () => {
         </MapContainer>
       </div>
 
-      {/* Bottom Timeline */}
       <div className="flex items-center px-4 py-1.5 bg-[#070d1a] border-t border-slate-800 h-12">
         <div className="flex items-center gap-3 pr-5 border-r border-slate-800 h-full">
           <button onClick={() => setCurrentStep(0)} className="p-1 border border-slate-700 rounded text-slate-400 hover:text-white hover:border-slate-500 transition-colors"><SkipBack className="size-3.5" /></button>

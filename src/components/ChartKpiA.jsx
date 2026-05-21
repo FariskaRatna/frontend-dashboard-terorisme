@@ -221,7 +221,7 @@ const ChartKpiA = () => {
   );
 
   return (
-    <div className="flex flex-1 min-w-0 flex-col h-[700px] w-full bg-[#0b1320] border border-slate-800 rounded shadow-lg overflow-hidden">
+    <div className="flex flex-1 min-w-0 flex-col h-[800px] w-full bg-[#0b1320] border border-slate-800 rounded shadow-lg overflow-hidden">
       
       {/* Header Utama Panel */}
       <div className="flex items-center px-1 py-3 shrink-0">
