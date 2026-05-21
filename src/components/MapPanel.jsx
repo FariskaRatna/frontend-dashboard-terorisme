@@ -19,7 +19,6 @@ const IDEOLOGY_COLORS = {
   "MPI": "#ec4899"   
 };
 
-// 1. PERBAIKAN RADAR CHART: Disesuaikan menjadi 10 sisi (Decagon)
 const RadarChart = ({ ideologies, totalCases }) => {
   const size = 160;
   const center = size / 2;
@@ -72,21 +71,20 @@ const RadarChart = ({ ideologies, totalCases }) => {
   );
 };
 
-const MOCK_CITIES = [
-  { id: 1, name: "Jakarta", prov: "DKI Jakarta", lat: -6.2088, lng: 106.8456, total: 36, ideologies: { "ISIS": 15, "JI": 10, "FPI": 6, "NII": 5 } },
-  { id: 2, name: "Morowali", prov: "Sulawesi Tengah", lat: -1.8893, lng: 121.9362, total: 2, ideologies: { "JI": 1, "MIT": 1 } },
-  { id: 3, name: "Surabaya", prov: "Jawa Timur", lat: -7.2504, lng: 112.7688, total: 12, ideologies: { "JAD": 6, "ISIS": 4, "AQ": 2 } },
-  { id: 4, name: "Makassar", prov: "Sulawesi Selatan", lat: -5.1476, lng: 119.4327, total: 8, ideologies: { "JAD": 4, "MIT": 2, "KHI": 2 } },
-  { id: 5, name: "Poso", prov: "Sulawesi Tengah", lat: -1.3945, lng: 120.7335, total: 18, ideologies: { "MIT": 12, "JI": 4, "MMI": 2 } },
-  { id: 6, name: "Medan", prov: "Sumatera Utara", lat: 3.5952, lng: 98.6722, total: 7, ideologies: { "JAD": 4, "MPI": 2, "ISIS": 1 } },
-  { id: 7, name: "Bima", prov: "Nusa Tenggara Barat", lat: -8.4627, lng: 118.7286, total: 5, ideologies: { "JAD": 3, "NII": 2 } },
-];
-
 const MapPanel = () => {
   const [activeTab, setActiveTab] = useState("B1");
   const [geoData, setGeoData] = useState(null);
 
   const [isLayerOpen, setIsLayerOpen] = useState(true);
+  const [clusterData, setClusterData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/clusters")
+      .then(res => res.json())
+      .then(data => setClusterData(data))
+      .catch(err => console.error("Gagal mengambil kluster", err))
+  }, []);
+
   const [showChoropleth, setShowChoropleth] = useState(true);
   const [showCluster, setShowCluster] = useState(true);
 
@@ -126,7 +124,6 @@ const MapPanel = () => {
     return hash % 60; 
   };
 
-  // 2. PERBAIKAN GENERATOR IDEOLOGI: Disesuaikan menjadi 10 item pembagi bobot
   const getProvinceIdeologies = (provName, totalCases) => {
     if (totalCases === 0) return { ISIS: 0, JI: 0, JAD: 0, MIT: 0, NII: 0, FPI: 0, AQ: 0, MMI: 0, KHI: 0, MPI: 0 };
     const hash1 = provName.charCodeAt(0)
@@ -474,7 +471,7 @@ const MapPanel = () => {
           <TileLayer attribution='&copy; CARTO' url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" subdomains="abcd" maxZoom={20} />
           {geoData && <GeoJSON ref={geoJsonLayerRef} data={geoData} style={(f) => getFeatureStyle(f, currentStep)} onEachFeature={onEachProvince} />}
           
-          {showCluster && MOCK_CITIES.map((city) => {
+          {showCluster && clusterData.map((city) => {
              const domIdeo = Object.keys(city.ideologies).reduce((a, b) => city.ideologies[a] > city.ideologies[b] ? a : b);
 
              return (
